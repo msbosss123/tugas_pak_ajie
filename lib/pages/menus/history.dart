@@ -8,57 +8,53 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  // List of food orders, including icons and image URLs
   final List<OrderItem> orderItems = [
     OrderItem(
       "Nasi Goreng",
       "pesanan ing tanggal 21 Sept 2024",
       "Rp30.000",
       Icons.rice_bowl,
-      "https://assets.unileversolutions.com/recipes-v2/242794.jpg", // Updated URL
+      "https://assets.unileversolutions.com/recipes-v2/242794.jpg",
     ),
     OrderItem(
       "Paket Hemat Ayam Crispy",
       "pesanan ing tanggal 18 Sept 2024",
       "Rp50.000",
       Icons.local_dining,
-      "https://eorder-bppbj.jakarta.go.id/web/image/product.image/27963/image?unique=b6b7ee0", // Updated URL
+      "https://eorder-bppbj.jakarta.go.id/web/image/product.image/27963/image?unique=b6b7ee0",
     ),
     OrderItem(
       "Seafood Platter",
       "pesanan ing tanggal 15 Sept 2024",
       "Rp100.000",
       Icons.emoji_food_beverage,
-      "https://asset.kompas.com/crops/Q6dYeoOTbUMQj-cy9d2p2QiIhcc=/0x0:1000x667/750x500/data/photo/2023/06/29/649d11a1ade36.jpeg", // Updated URL
+      "https://asset.kompas.com/crops/Q6dYeoOTbUMQj-cy9d2p2QiIhcc=/0x0:1000x667/750x500/data/photo/2023/06/29/649d11a1ade36.jpeg",
     ),
     OrderItem(
       "Cumi Goreng Tepung",
       "pesanan ing tanggal 10 Sept 2024",
       "Rp45.000",
       Icons.icecream,
-      "https://img-global.cpcdn.com/recipes/25c386012da26447/1200x630cq70/photo.jpg", // Updated URL
+      "https://img-global.cpcdn.com/recipes/25c386012da26447/1200x630cq70/photo.jpg",
     ),
     OrderItem(
       "Kepiting Saus Padang",
       "pesanan ing tanggal 05 Sept 2024",
       "Rp120.000",
       Icons.restaurant_menu,
-      "https://i.ytimg.com/vi/jNsQJocwRhU/maxresdefault.jpg", // Updated URL
+      "https://i.ytimg.com/vi/jNsQJocwRhU/maxresdefault.jpg",
     ),
   ];
 
-  // List of filtered order items based on search query
   List<OrderItem> filteredOrderItems = [];
   String searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    // Initially, show all order items
     filteredOrderItems = orderItems;
   }
 
-  // Method to update the filtered list based on the search query
   void _filterOrderItems(String query) {
     setState(() {
       searchQuery = query.toLowerCase();
@@ -66,6 +62,65 @@ class _HistoryState extends State<History> {
         return order.foodName.toLowerCase().contains(searchQuery);
       }).toList();
     });
+  }
+
+  void _toggleBookmark(OrderItem orderItem) {
+    setState(() {
+      orderItem.isBookmarked = !orderItem.isBookmarked;
+    });
+  }
+
+  void _showBookmarkedItems() {
+    List<OrderItem> bookmarkedItems =
+        orderItems.where((item) => item.isBookmarked).toList();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Bookmarked Items"),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              itemCount: bookmarkedItems.length,
+              itemBuilder: (context, index) {
+                final orderItem = bookmarkedItems[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(orderItem.imageUrl),
+                  ),
+                  title: Text(orderItem.foodName),
+                  subtitle: Text(orderItem.date),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      _deleteBookmark(orderItem);
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _deleteBookmark(OrderItem orderItem) {
+    setState(() {
+      orderItem.isBookmarked = false;
+    });
+
+    Navigator.of(context).pop(); // Close the dialog
+    _showBookmarkedItems(); // Show the updated list of bookmarked items
   }
 
   @override
@@ -81,10 +136,8 @@ class _HistoryState extends State<History> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              // Search action (optional, already implemented in TextField)
-            },
+            icon: const Icon(Icons.bookmark, color: Colors.white),
+            onPressed: _showBookmarkedItems, // Menampilkan dialog bookmark
           ),
         ],
       ),
@@ -94,7 +147,6 @@ class _HistoryState extends State<History> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-
             // Search Field
             TextField(
               onChanged: _filterOrderItems,
@@ -108,8 +160,6 @@ class _HistoryState extends State<History> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Section Title
             const Text(
               "Ayo Podo Pesen bolo!!",
               style: TextStyle(
@@ -119,19 +169,13 @@ class _HistoryState extends State<History> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Order History Cards
             Expanded(
               child: ListView.builder(
                 itemCount: filteredOrderItems.length,
                 itemBuilder: (context, index) {
                   final orderItem = filteredOrderItems[index];
                   return _buildHistoryCard(
-                    orderItem.icon,
-                    orderItem.imageUrl,
-                    orderItem.foodName,
-                    orderItem.date,
-                    orderItem.price,
+                    orderItem,
                   );
                 },
               ),
@@ -143,9 +187,7 @@ class _HistoryState extends State<History> {
     );
   }
 
-  // Helper method to build a history card
-  Widget _buildHistoryCard(IconData icon, String imageUrl, String foodName,
-      String date, String price) {
+  Widget _buildHistoryCard(OrderItem orderItem) {
     return Card(
       color: Colors.green[50],
       shape: RoundedRectangleBorder(
@@ -156,27 +198,24 @@ class _HistoryState extends State<History> {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            // Image section
             Container(
               width: 60,
               height: 60,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 image: DecorationImage(
-                  image: NetworkImage(imageUrl),
+                  image: NetworkImage(orderItem.imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             const SizedBox(width: 16),
-
-            // Text Section
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    foodName,
+                    orderItem.foodName,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -185,7 +224,7 @@ class _HistoryState extends State<History> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    date,
+                    orderItem.date,
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -194,10 +233,17 @@ class _HistoryState extends State<History> {
                 ],
               ),
             ),
-
-            // Price Section
+            IconButton(
+              icon: Icon(
+                Icons.bookmark,
+                color: orderItem.isBookmarked ? Colors.yellow : Colors.grey,
+              ),
+              onPressed: () {
+                _toggleBookmark(orderItem);
+              },
+            ),
             Text(
-              price,
+              orderItem.price,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -211,13 +257,15 @@ class _HistoryState extends State<History> {
   }
 }
 
-// OrderItem class to hold order data with image URL
+// OrderItem class to hold order data with image URL and bookmark status
 class OrderItem {
   final String foodName;
   final String date;
   final String price;
   final IconData icon;
   final String imageUrl;
+  bool isBookmarked; // Status bookmark
 
-  OrderItem(this.foodName, this.date, this.price, this.icon, this.imageUrl);
+  OrderItem(this.foodName, this.date, this.price, this.icon, this.imageUrl,
+      {this.isBookmarked = false}); // Inisialisasi bookmark dengan false
 }
