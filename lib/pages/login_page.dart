@@ -6,20 +6,19 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TextEditingController to capture the input for username and password
+    // TextEditingController untuk username dan password
     TextEditingController usernameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      backgroundColor:
-          Colors.white, // Set background color to white for a clean look
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Gojek-like logo (simplified, can be replaced with an actual logo widget)
+            // Logo atau header aplikasi
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -42,7 +41,6 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 40),
 
-            // Header Text
             const Text(
               "Login ke Akunmu",
               style: TextStyle(
@@ -53,14 +51,13 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Subtitle Text
             const Text(
               "Masukkan detail login Anda.",
               style: TextStyle(fontSize: 16, color: Colors.black54),
             ),
             const SizedBox(height: 32),
 
-            // Username field
+            // Kolom email
             TextField(
               controller: usernameController,
               decoration: InputDecoration(
@@ -75,10 +72,10 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Password field
+            // Kolom password
             TextField(
               controller: passwordController,
-              obscureText: true, // To obscure password text
+              obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Kata Sandi',
                 labelStyle: TextStyle(color: Colors.grey[700]),
@@ -87,26 +84,25 @@ class LoginPage extends StatelessWidget {
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                suffixIcon:
-                    Icon(Icons.visibility_outlined, color: Colors.grey[600]),
+                suffixIcon: Icon(Icons.visibility_outlined,
+                    color: Colors.grey[600]),
               ),
             ),
             const SizedBox(height: 8),
 
-            // Password requirements text
             const Text(
               "Kata sandi harus minimal 8 karakter, sertakan huruf besar, kecil, dan angka.",
               style: TextStyle(fontSize: 12, color: Colors.black54),
             ),
             const SizedBox(height: 32),
 
-            // Login button (with Gojek green color)
+            // Tombol login
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green, // Gojek's primary color
+                  backgroundColor: Colors.green,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -116,7 +112,7 @@ class LoginPage extends StatelessWidget {
                   String password = passwordController.text;
 
                   if (username.isNotEmpty && password.isNotEmpty) {
-                    // Navigate to the homepage (replace with your authentication logic)
+                    // Navigasi ke halaman utama
                     Get.toNamed('/homepage');
                   } else {
                     Get.snackbar(
@@ -138,7 +134,6 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Information about required fields
             const Text(
               "*Wajib diisi",
               style: TextStyle(fontSize: 12, color: Colors.red),

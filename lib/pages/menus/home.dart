@@ -8,15 +8,18 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // NU's white background
       appBar: AppBar(
-        backgroundColor: Colors.green, // NU style color
+        backgroundColor: const Color.fromARGB(255, 0, 71, 2), // NU style color
         elevation: 0,
         title: Row(
           children: [
             Icon(Icons.location_on, color: Colors.white),
             const SizedBox(width: 8),
             const Text(
-              "Lokasi Anda",
-              style: TextStyle(color: Colors.white),
+              "lokasi",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20, // Ukuran font yang dapat disesuaikan
+              ),
             ),
             Icon(Icons.arrow_drop_down, color: Colors.white),
           ],
@@ -44,7 +47,7 @@ class Home extends StatelessWidget {
             Container(
               height: 150,
               width: double.infinity,
-              color: Colors.green[100],
+              color: const Color.fromARGB(255, 0, 71, 2),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -52,18 +55,18 @@ class Home extends StatelessWidget {
                   children: const [
                     SizedBox(height: 50), // Provide some spacing
                     Text(
-                      "Tukar Poin NU nyel",
+                      "ijol poin NU nyel",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                     Text(
-                      "Scan Kartu NU nyel di sini!",
+                      "Pindai Kartu NU Nyel ing kene!",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.black54,
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                   ],
@@ -82,37 +85,37 @@ class Home extends StatelessWidget {
                     _buildFoodCard(
                       Icons.local_pizza,
                       "Pepperoni Pizza",
-                      "Mulai dari Rp50.000",
+                      "wiwit saking RP.000",
                     ),
                     const SizedBox(width: 16), // Spacing between cards
                     _buildFoodCard(
                       Icons.fastfood,
                       "Cheeseburger",
-                      "Mulai dari Rp30.000",
+                      "wiwit saking Rp30.000",
                     ),
                     const SizedBox(width: 16),
                     _buildFoodCard(
                       Icons.rice_bowl,
                       "Nasi Goreng Spesial",
-                      "Mulai dari Rp25.000",
+                      "wiwit saking Rp25.000",
                     ),
                     const SizedBox(width: 16),
                     _buildFoodCard(
                       Icons.local_dining,
                       "Ayam Crispy",
-                      "Mulai dari Rp40.000",
+                      "wiwit saking Rp40.000",
                     ),
                     const SizedBox(width: 16),
                     _buildFoodCard(
                       Icons.icecream,
                       "Cumi Saus Padang",
-                      "Mulai dari Rp60.000",
+                      "wiwit saking Rp60.000",
                     ),
                     const SizedBox(width: 16),
                     _buildFoodCard(
                       Icons.restaurant,
                       "Kepiting Saus Mentega",
-                      "Mulai dari Rp120.000",
+                      "wiwit saking Rp120.000",
                     ),
                   ],
                 ),

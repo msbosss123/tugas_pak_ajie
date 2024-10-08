@@ -11,7 +11,8 @@ class Profile extends StatelessWidget {
           "Profile",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.green[800], // Gojek's signature green color
+        backgroundColor:
+            Color.fromARGB(255, 0, 71, 2), 
         elevation: 0,
         actions: [
           IconButton(
@@ -147,7 +148,7 @@ class Profile extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: Colors.white, // Gojek's clean white background
+      backgroundColor: Colors.white,
     );
   }
 }

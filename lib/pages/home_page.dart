@@ -16,21 +16,24 @@ class HomePage extends StatelessWidget {
     final List<Widget> menus = [Home(), History(), Profile()];
 
     return Scaffold(
-      body: Obx(() => menus[bottomNavController
-          .selectedIndex.value]), // Menonton perubahan nilai selectedIndex
+      body: Obx(() => menus[bottomNavController.selectedIndex.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-          currentIndex: bottomNavController
-              .selectedIndex.value, // Menonton perubahan nilai selectedIndex
-          onTap: bottomNavController
-              .changeIndexMenu, // Memanggil fungsi untuk mengganti indeks
+          currentIndex: bottomNavController.selectedIndex.value,
+          onTap: bottomNavController.changeIndexMenu,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: "Beranda"),
+              icon: Icon(Icons.home_outlined),
+              label: "Beranda",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.work_history_outlined), label: "Makanan"),
+              icon: Icon(Icons.work_history_outlined),
+              label: "Makanan",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person_2_outlined), label: "Profil"),
+              icon: Icon(Icons.person_2_outlined),
+              label: "Profil",
+            ),
           ],
         ),
       ),

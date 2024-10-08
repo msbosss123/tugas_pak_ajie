@@ -12,35 +12,35 @@ class _HistoryState extends State<History> {
   final List<OrderItem> orderItems = [
     OrderItem(
       "Nasi Goreng",
-      "Pesanan pada 21 Sept 2024",
+      "pesanan ing tanggal 21 Sept 2024",
       "Rp30.000",
       Icons.rice_bowl,
       "https://assets.unileversolutions.com/recipes-v2/242794.jpg", // Updated URL
     ),
     OrderItem(
       "Paket Hemat Ayam Crispy",
-      "Pesanan pada 18 Sept 2024",
+      "pesanan ing tanggal 18 Sept 2024",
       "Rp50.000",
       Icons.local_dining,
       "https://eorder-bppbj.jakarta.go.id/web/image/product.image/27963/image?unique=b6b7ee0", // Updated URL
     ),
     OrderItem(
       "Seafood Platter",
-      "Pesanan pada 15 Sept 2024",
+      "pesanan ing tanggal 15 Sept 2024",
       "Rp100.000",
       Icons.emoji_food_beverage,
       "https://asset.kompas.com/crops/Q6dYeoOTbUMQj-cy9d2p2QiIhcc=/0x0:1000x667/750x500/data/photo/2023/06/29/649d11a1ade36.jpeg", // Updated URL
     ),
     OrderItem(
       "Cumi Goreng Tepung",
-      "Pesanan pada 10 Sept 2024",
+      "pesanan ing tanggal 10 Sept 2024",
       "Rp45.000",
       Icons.icecream,
       "https://img-global.cpcdn.com/recipes/25c386012da26447/1200x630cq70/photo.jpg", // Updated URL
     ),
     OrderItem(
       "Kepiting Saus Padang",
-      "Pesanan pada 05 Sept 2024",
+      "pesanan ing tanggal 05 Sept 2024",
       "Rp120.000",
       Icons.restaurant_menu,
       "https://i.ytimg.com/vi/jNsQJocwRhU/maxresdefault.jpg", // Updated URL
@@ -72,10 +72,10 @@ class _HistoryState extends State<History> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[800],
+        backgroundColor: const Color.fromARGB(255, 0, 71, 2),
         elevation: 0,
         title: const Text(
-          "Riwayat Pesanan",
+          "Menu",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -111,7 +111,7 @@ class _HistoryState extends State<History> {
 
             // Section Title
             const Text(
-              "Riwayat Pemesanan",
+              "Ayo Podo Pesen bolo!!",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
